@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block title %}Financial Survey - FinMate{% endblock %}
+{% block content %}
+<div class="auth-card survey-card">
+  <h1>Complete Your Financial Profile</h1>
+  <p class="subtitle">Help us understand your finances to provide better insights</p>
+  
+  <form method="post" class="survey-form">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+      <div class="error-messages">
+        {% for error in form.non_field_errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="form-section">
+      <h2>Income & Expenses</h2>
+      
+      <div class="field">
+        {{ form.monthly_income.label_tag }}
+        <div class="field-help">Monthly income from all sources</div>
+        {{ form.monthly_income }}
+        {% if form.monthly_income.errors %}
+          <div class="errors">{{ form.monthly_income.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        {{ form.necessary_needs.label_tag }}
+        <div class="field-help">Fixed expenses like rent, EMI, groceries, utilities</div>
+        {{ form.necessary_needs }}
+        {% if form.necessary_needs.errors %}
+          <div class="errors">{{ form.necessary_needs.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        {{ form.monthly_unwanted_limit.label_tag }}
+        <div class="field-help">Budget for discretionary spending (shopping, dining, entertainment)</div>
+        {{ form.monthly_unwanted_limit }}
+        {% if form.monthly_unwanted_limit.errors %}
+          <div class="errors">{{ form.monthly_unwanted_limit.errors }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Goals & Wants</h2>
+      
+      <div class="field">
+        {{ form.goals_and_wants.label_tag }}
+        <div class="field-help">Example: "Car: ₹500,000 by Dec 2026", "Vacation: ₹100,000 by Jul 2026"</div>
+        {{ form.goals_and_wants }}
+        {% if form.goals_and_wants.errors %}
+          <div class="errors">{{ form.goals_and_wants.errors }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Complete Profile & Continue</button>
+  </form>
+</div>
+
+<style>
+  .survey-card {
+    max-width: 600px;
+    margin: 40px auto;
+  }
+  
+  .subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+  
+  .survey-form .form-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .survey-form .form-section:last-of-type {
+    border-bottom: none;
+  }
+  
+  .survey-form h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .field-help {
+    font-size: 12px;
+    color: #999;
+    margin: 5px 0;
+  }
+  
+  .error-messages {
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .error-messages .error {
+    color: #d00;
+    margin: 5px 0;
+  }
+  
+  .errors {
+    color: #d00;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+</style>
+{% endblock %}
