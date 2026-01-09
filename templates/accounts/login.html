@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Login - FinMate{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Login</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="field">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      {{ form.username.errors }}
+    </div>
+    <div class="field">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+      {{ form.password.errors }}
+    </div>
+    <button type="submit" class="btn">Log in</button>
+  </form>
+  <p>Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a></p>
+</div>
+{% endblock %}
