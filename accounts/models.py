@@ -78,6 +78,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
     
     # Financial Survey Data
+    # survey data
     monthly_income = models.DecimalField(
         max_digits=12,
         decimal_places=2,
